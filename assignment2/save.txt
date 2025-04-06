@@ -1,0 +1,4 @@
+Hero Spider Man has killed a monster.
+Monster has defeated the hero.
+Hero Sagor has killed a monster.
+Hero Radia has killed a monster.
