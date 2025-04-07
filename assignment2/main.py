@@ -4,6 +4,7 @@ import platform
 from hero import Hero
 from monster import Monster
 import functions  # Use the provided helper functions
+from weather import WeatherSystem  # Import the weather system
 
 # Display system information
 print(f"Operating System: {os.name}")
@@ -16,9 +17,15 @@ functions.load_game()
 hero = Hero()
 monster = Monster()
 
+# Initialize the weather system
+weather = WeatherSystem()
+
 # Displaying initial stats of Hero and Monster
 print(f"Hero's Combat Strength is: {hero.combat_strength}, Health is: {hero.health_points}")
 print(f"Monster's Combat Strength is: {monster.combat_strength}, Health is: {monster.health_points}")
+
+# Apply weather effects on Hero
+weather.apply_weather_effects(hero)
 
 # Rolling for Weapon
 input("Roll the dice for weapon (Press Enter)")
@@ -60,6 +67,10 @@ print(f"Hero's Health after using loot is: {hero.health_points}")
 print("\n🚀 The battle begins! 🚀")
 while hero.health_points > 0 and monster.health_points > 0:
     input("Press Enter to roll for attack...")
+
+    # Apply weather effects during the battle
+    weather.apply_weather_effects(hero)
+
     attack_roll = random.choice(range(1, 7))
 
     if attack_roll % 2 == 0:
@@ -68,6 +79,9 @@ while hero.health_points > 0 and monster.health_points > 0:
     else:
         print("The Hero strikes first!")
         hero.hero_attacks(monster)
+
+    # Change the weather condition after each round
+    weather.change_weather()
 
 # Announce the Winner
 if hero.health_points > 0:
